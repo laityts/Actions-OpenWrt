@@ -9,7 +9,9 @@
 name: Build OpenWrt
 
 on: 
-  repository_dispatch:
+  schedule:	
+    - cron: 30 13 * * 6	
+  workflow_dispatch:
 
 env:
   REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
@@ -29,7 +31,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: ["${{ github.event.client_payload.target }}"]
+        target: [phicomm-k2p]
         
     steps:
     - name: Checkout
